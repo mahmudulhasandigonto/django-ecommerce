@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Fashion Page{% endblock title %}
+
 
 {% block content %}
 
@@ -18,7 +20,7 @@
 </div>
 <!-- fashion section -->
 <div class="fashion">
-   <img src="images/fashion.jpg" alt="#"/>
+   <img src="{% static 'images/fashion.jpg' %}" alt="#"/>
 </div>
 <!-- end fashion section -->
 <!--  footer -->

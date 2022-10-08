@@ -10,4 +10,5 @@ urlpatterns = [
     path('fashion/', views.fashion, name='fashion'),
     path('news/', views.news, name='news'),
     path('contact/', views.contact, name='contact'),
+    path('categorywise/<int:id>/', views.categorywise, name='categorywise'),
 ]
