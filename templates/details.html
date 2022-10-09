@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<div class="container">
+   <div class="row">
+      <div class="col text-center my-5">
+         <img src="{{product.product_img.url}}" alt="">
+      </div>
+      <div class="col">
+         <h2>{{product.product_name}}</h2>
+         <h2>{{product.brand}}</h2>
+         <h2>{{product.category}}</h2>
+         <h2>{{product.product_price}}</h2>
+         <p>{{product.product_Description}}</p>
+      </div>
+   </div>
+</div>
+{% endblock content %}

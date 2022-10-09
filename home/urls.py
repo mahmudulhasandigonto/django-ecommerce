@@ -11,4 +11,6 @@ urlpatterns = [
     path('news/', views.news, name='news'),
     path('contact/', views.contact, name='contact'),
     path('categorywise/<int:id>/', views.categorywise, name='categorywise'),
+    path('details/<int:id>/', views.details, name='details'),
+    path('search/', views.search, name='search'),
 ]

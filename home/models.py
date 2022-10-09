@@ -40,3 +40,14 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+
+class New(models.Model):
+    title = models.CharField(max_length=225, default='')
+    image = models.ImageField(
+        upload_to='images', height_field=None, width_field=None, max_length=100, default='')
+    description = models.TextField(max_length=500, default='')
+    pub_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

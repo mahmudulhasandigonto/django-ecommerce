@@ -31,7 +31,7 @@
          {% for category in categoryList %}
          <div class="col-md-2 col-sm-4 pa_left">
             <div class="six_probpx yellow_bg">
-               <i><a href=""><img src="{{category.image.url}}" alt="#" /></a></i>
+               <i><a href="{% url 'categorywise' category.id %}"><img src="{{category.image.url}}" alt="#" /></a></i>
                <span>{{category.name}}</span>
             </div>
          </div>
@@ -51,10 +51,11 @@
          </div>
       </div>
       <div class="row">
+         {% if productList %}
          <div class="product_main">
             {% for product in productList %}
             <div class="project_box ">
-               <div class="dark_white_bg"><img src="{{product.product_img.url}}" alt="#" /></div>
+               <div class="dark_white_bg"><a href="{% url 'details' product.id %}"><img src="{{product.product_img.url}}" alt="#" /></a></div>
                <h3>{{product.product_name}} ${{product.product_price}}</h3>
             </div>
             {% endfor %}
@@ -62,6 +63,14 @@
                <a class="read_more" href="#">See More</a>
             </div>
          </div>
+         {% else %}
+         <div class="bg-danger text-light mx-3">
+            <p>There is No Product</p>
+         </div>
+         {% endif %}
+
+
+
       </div>
    </div>
 </div>
@@ -82,69 +91,30 @@
          </div>
       </div>
       <div class="row">
+
+         {% for news in newsList %}
+
          <div class="col-md-12 margin_top40">
             <div class="row d_flex">
                <div class="col-md-5">
                   <div class="news_img">
-                     <figure><img src="{% static 'images/news_img1.jpg' %}"></figure>
+                     <figure><img src="{{news.image.url}}"></figure>
                   </div>
                </div>
                <div class="col-md-7">
                   <div class="news_text">
-                     <h3>Specimen book. It has survived not only five</h3>
+                     <h3>{{news.title}}</h3>
                      <span>7 July 2019</span>
                      <div class="date_like">
                         <span>Like </span><span class="pad_le">Comment</span>
                      </div>
-                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book.</p>
+                     <p>{{news.description}}</p>
                   </div>
                </div>
             </div>
          </div>
-         <div class="col-md-12 margin_top40">
-            <div class="row d_flex">
-               <div class="col-md-5">
-                  <div class="news_img">
-                     <figure><img src="{% static 'images/news_img2.jpg' %}"></figure>
-                  </div>
-               </div>
-               <div class="col-md-7">
-                  <div class="news_text">
-                     <h3>Specimen book. It has survived not only five</h3>
-                     <span>7 July 2019</span>
-                     <div class="date_like">
-                        <span>Like </span><span class="pad_le">Comment</span>
-                     </div>
-                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-md-12 margin_top40">
-            <div class="row d_flex">
-               <div class="col-md-5">
-                  <div class="news_img">
-                     <figure><img src="{% static 'images/news_img3.jpg' %}"></figure>
-                  </div>
-               </div>
-               <div class="col-md-7">
-                  <div class="news_text">
-                     <h3>Specimen book. It has survived not only five</h3>
-                     <span>7 July 2019</span>
-                     <div class="date_like">
-                        <span>Like </span><span class="pad_le">Comment</span>
-                     </div>
-                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
+
+         {% endfor %}
       </div>
    </div>
 </div>
