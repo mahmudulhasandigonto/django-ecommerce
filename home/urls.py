@@ -13,4 +13,6 @@ urlpatterns = [
     path('categorywise/<int:id>/', views.categorywise, name='categorywise'),
     path('details/<int:id>/', views.details, name='details'),
     path('search/', views.search, name='search'),
+    path('cart/', views.cart, name='cart'),
+    path('deleteFormCart/<int:id>', views.deleteFormCart, name='deleteFormCart'),
 ]

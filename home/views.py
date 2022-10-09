@@ -1,7 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import render
 
-from home.models import Brand, Category, New, Product
+from home.models import Brand, Cart, Category, New, Product
 
 # Create your views here.
 
@@ -12,10 +12,13 @@ def index(request):
     newsList = New.objects.all()
     context = {"caregoryList": caregoryList,
                "productList": productList, "newsList": newsList}
-    # print(productList.id)
-    print(caregoryList[0].id)
 
     return render(request, 'index.html', context)
+
+
+def cart(request):
+
+    return render(request, 'cart.html')
 
 
 def about(request):
@@ -33,17 +36,20 @@ def products(request):
 
 
 def fashion(request):
+
     return render(request, 'fashion.html')
 
 
 def news(request):
     newsList = New.objects.all()
+
     context = {'newsList': newsList}
 
     return render(request, 'news.html', context)
 
 
 def categorywise(request, id):
+
     categoryList = Category.objects.all()
     productList = Product.objects.filter(category=id)
     newsList = New.objects.all()
@@ -54,11 +60,26 @@ def categorywise(request, id):
 
 
 def details(request, id):
+
     product = Product.objects.get(id=id)
     context = {"product": product}
     return render(request, 'details.html', context)
 
 
 def search(request):
+    query = request.GET.get('query')
+    productList = Product.objects.filter(product_name__icontains=query)
 
-    return render(request, 'search.html')
+    context = {"productList": productList}
+    return render(request, 'search.html', context)
+
+
+def deleteFormCart(request, id):
+    cart = Cart.objects.get(id=id)
+    cartList = Cart.objects.all()
+    cart.delete()
+
+    if len(cartList) > 0:
+        return render(request, 'cart.html')
+    else:
+        return render(request, 'index.html')

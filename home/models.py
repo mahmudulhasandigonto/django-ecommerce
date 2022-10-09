@@ -3,6 +3,13 @@ from django.db import models
 # Create your models here.
 
 
+class Cart(models.Model):
+    productId = models.IntegerField()
+
+    def __str__(self):
+        return self.productId
+
+
 class Contact(models.Model):
     name = models.CharField(max_length=250)
     phone = models.CharField(max_length=15)

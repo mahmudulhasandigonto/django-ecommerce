@@ -102,7 +102,7 @@
                   </div>
                   <div class="col-md-4">
                      <ul class="right_icon d_none1">
-                        <li><a href="#"><img src="{% static 'images/shopping.png' %}" alt="#" /></a> </li>
+                        <li><a href="{% url 'cart' %}"><img src="{% static 'images/shopping.png' %}" alt="#" /></a> </li>
                         <a href="#" class="order">Order Now</a>
                      </ul>
                   </div>
@@ -137,7 +137,7 @@
                                  <a class="nav-link" href="{% url 'news' %}">News</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                                 <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                               </li>
                            </ul>
                         </div>
@@ -145,10 +145,10 @@
                   </div>
                   <div class="col-md-4">
                      <div class="search">
-                        <form method="post">
+                        <form method="get" action='{% url 'search' %}'>
                            {% csrf_token %}
-                           <input class="form_sea" type="text" placeholder="Search" name="search">
-                           <button type="submit" class="seach_icon"><a href="{% url 'search' %}"><i class="fa fa-search"></i></a></button>
+                           <input class="form_sea" name='query' type="text" placeholder="Search">
+                           <button type="submit" class="seach_icon"><i class="fa fa-search"></i></button>
                         </form>
                      </div>
                   </div>
