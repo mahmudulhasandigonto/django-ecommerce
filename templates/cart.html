@@ -3,28 +3,34 @@
 
 
 {% block content %}
-<div class="container">
+<div class="container mt-3">
+    <div class="row text-center">
+      <div class="col bg-secondary"><h2>Cart List Here</h2></div>
+    </div>
    <table class="table">
       <thead>
         <tr>
           <th scope="col">Product</th>
           <th scope="col">Price</th>
-          <th scope="col">Tax</th>
           <th scope="col">Quantity</th>
+          <th scope="col">Tax</th>
           <th scope="col">Total</th>
           <th scope="col">Remove</th>
         </tr>
       </thead>
       <tbody>
+
+        {% for cart in cartList %}
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Otto</td>
-          <td><a href="{% url 'delete' id %}">❌</a></td>
+          <th scope="row">{{cart.cart_name}}</th>
+          <td>{{cart.cart_price}}</td>
+          <td>{{cart.cart_quantity}}</td>
+          <td>{{cart.cart_tax}}</td>
+          {% comment %} <td>{{cart.cart_price * cart.cart_quantity}}</td> {% endcomment %}
+          <td><a href="{% url 'deleteFormCart' cart.id %}">❌</a></td>
+          
         </tr>
-        
+        {% endfor %}
       </tbody>
     </table>
 </div>

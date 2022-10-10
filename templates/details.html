@@ -1,19 +1,74 @@
 {% extends 'base.html' %}
 
 
-
 {% block content %}
 <div class="container">
-   <div class="row">
+   <div class="row my-2">
       <div class="col text-center my-5">
-         <img src="{{product.product_img.url}}" alt="">
+         <img src="{{product.product_img.url}}" class="img-thumbnail" alt="">
       </div>
-      <div class="col">
-         <h2>{{product.product_name}}</h2>
-         <h2>{{product.brand}}</h2>
-         <h2>{{product.category}}</h2>
-         <h2>{{product.product_price}}</h2>
-         <p>{{product.product_Description}}</p>
+      <div class="col mb-1">
+         <h2 class="mt-5">{{product.product_name}}</h2>
+         <p>{{product.product_Description|truncatewords:40}}</p>
+         <p class='mt-4'>Price: <span class='span'>${{product.product_price}}</span></p>
+         <p>Brand: <span class='span mt-2'>{{product.brand}}</span></p>
+         <p>Catetory: <span class='span mt-2'>{{product.category}}</span></p>
+         <div class="row mt-4">
+            <div class="col-md-6">
+               <form method="GET" action="{% url 'cart' %}">
+                  {% csrf_token %}
+                  <div class="input-group mb-3">
+                     <input bordercolor="green" type="number" class="form-control" value="1" name="quantity">
+                     <input type="hidden" value="{{product.id}}"  name="product_id">
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row mb-5">
+      <div class="col text-center bg-secondary">
+         <h2 style="color:white">PRODUCT DETAILS</h2>
+      </div>
+      <p>{{product.product_Description}}</p>
+   </div>
+</div>
+
+
+<div class="news">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="titlepage">
+               <h2>Letest News</h2>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+
+         {% for news in newsList %}
+         <div class="col-md-12 margin_top40">
+            <div class="row d_flex">
+               <div class="col-md-5">
+                  <div class="news_img">
+                     <figure><img src="{{news.image.url}}"></figure>
+                  </div>
+               </div>
+               <div class="col-md-7">
+                  <div class="news_text">
+                     <h3>{{news.title}}</h3>
+                     <span>{{news.pub_date}}</span>
+                     <div class="date_like">
+                        <span>Like </span><span class="pad_le">Comment</span>
+                     </div>
+                     <p>{{news.description}}</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+         
       </div>
    </div>
 </div>

@@ -4,10 +4,14 @@ from django.db import models
 
 
 class Cart(models.Model):
-    productId = models.IntegerField()
+    product_id = models.IntegerField(default=0)
+    cart_name = models.CharField(max_length=225)
+    cart_price = models.DecimalField(max_digits=19, decimal_places=2)
+    cart_tax = models.DecimalField(max_digits=19, decimal_places=2)
+    cart_quantity = models.IntegerField()
 
     def __str__(self):
-        return self.productId
+        return self.cart_name
 
 
 class Contact(models.Model):

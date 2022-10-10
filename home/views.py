@@ -17,8 +17,19 @@ def index(request):
 
 
 def cart(request):
+    qnt = request.GET.get('quantity')
+    product_id = request.GET.get('product_id')
+    if len(Cart.objects.filter(product_id=product_id)) < 1:
+        product = Product.objects.get(id=product_id)
+        cart = Cart(product_id=product_id, cart_name=product.product_name,
+                    cart_price=product.product_price, cart_tax=5, cart_quantity=qnt)
+        cart.save()
 
-    return render(request, 'cart.html')
+    cartList = Cart.objects.all()
+    # cartList.delete()
+    context = {'cartList': cartList}
+
+    return render(request, 'cart.html', context)
 
 
 def about(request):
@@ -60,9 +71,9 @@ def categorywise(request, id):
 
 
 def details(request, id):
-
+    newsList = New.objects.all()
     product = Product.objects.get(id=id)
-    context = {"product": product}
+    context = {"product": product, "newsList": newsList}
     return render(request, 'details.html', context)
 
 
@@ -75,11 +86,6 @@ def search(request):
 
 
 def deleteFormCart(request, id):
-    cart = Cart.objects.get(id=id)
-    cartList = Cart.objects.all()
+    cart = Cart.objects.filter(id=id)
     cart.delete()
-
-    if len(cartList) > 0:
-        return render(request, 'cart.html')
-    else:
-        return render(request, 'index.html')
+    return render(request, 'cart.html')
