@@ -1,5 +1,6 @@
 from multiprocessing import context
-from django.shortcuts import render
+import re
+from django.shortcuts import render, redirect
 
 from home.models import Brand, Cart, Category, New, Product
 
@@ -27,8 +28,26 @@ def cart(request):
 
     cartList = Cart.objects.all()
     # cartList.delete()
-    context = {'cartList': cartList}
+    # For Subtotal
+    cartList = Cart.objects.all()
+    total = 0
+    for cart in cartList:
+        total = total + (cart.cart_price * cart.cart_quantity)
 
+    sub_total = (total/100)*5+total
+    context = {'cartList': cartList, "sub_total": sub_total}
+
+    return render(request, 'cart.html', context)
+
+
+def getcart(request):
+    cartList = Cart.objects.all()
+    total = 0
+    for cart in cartList:
+        total = total + (cart.cart_price * cart.cart_quantity)
+
+    sub_total = (total/100)*5 + total
+    context = {'cartList': cartList, 'subtotal': sub_total}
     return render(request, 'cart.html', context)
 
 
@@ -88,4 +107,21 @@ def search(request):
 def deleteFormCart(request, id):
     cart = Cart.objects.filter(id=id)
     cart.delete()
-    return render(request, 'cart.html')
+    return redirect('/getcart/')
+
+
+def login(request):
+
+    return render(request, 'login.html')
+
+
+def registration(request):
+
+    return render(request, 'registration.html')
+
+
+def validate_user(request):
+    user_email = request.POST.get('email')
+    user_password = request.POST.get('password')
+
+    return redirect('/index/')

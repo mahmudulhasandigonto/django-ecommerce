@@ -4,34 +4,48 @@
 
 {% block content %}
 <div class="container mt-3">
-    <div class="row text-center">
-      <div class="col bg-secondary"><h2>Cart List Here</h2></div>
+  <div class="row text-center">
+    <div class="col bg-secondary">
+      <h2>Cart List Here</h2>
     </div>
-   <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Product</th>
-          <th scope="col">Price</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Tax</th>
-          <th scope="col">Total</th>
-          <th scope="col">Remove</th>
-        </tr>
-      </thead>
-      <tbody>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Tax</th>
+        <th scope="col">Total</th>
+        <th scope="col" style="text-align:center">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
 
-        {% for cart in cartList %}
-        <tr>
-          <th scope="row">{{cart.cart_name}}</th>
-          <td>{{cart.cart_price}}</td>
-          <td>{{cart.cart_quantity}}</td>
-          <td>{{cart.cart_tax}}</td>
-          {% comment %} <td>{{cart.cart_price * cart.cart_quantity}}</td> {% endcomment %}
-          <td><a href="{% url 'deleteFormCart' cart.id %}">❌</a></td>
-          
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+      {% for cart in cartList %}
+      <tr>
+        <th scope="row">{{cart.cart_name}}</th>
+        <td>{{cart.cart_price}}</td>
+        <td>{{cart.cart_quantity}}</td>
+        <td>{{cart.cart_tax}}%</td>
+        <td>{% widthratio cart.cart_price 1 cart.cart_quantity %}</td>
+        <td style="text-align:center"><a href="{% url 'deleteFormCart' cart.id %}">❌</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <tbody>
+          <th>SubTotal</th>
+          <th style="text-align:center">{{sub_total}}</th>
+          <th style="text-align:right"><a href="{% url 'login' %}" class="btn btn-primary">Checkout</a></th>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 {% endblock content %}

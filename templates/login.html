@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact Page{% endblock title %}
+
+
+{% block content %}
+<!-- banner -->
+<div class="blue_bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="titlepage">
+               <h2>Contact Us</h2>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- contact section -->
+<div id="contact" class="contact">
+   <div class="con_bg">
+      <div class="container">
+         <div class="row mb-5">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+               <form id="request" class="main_form" method="GET" action="{% url 'validate_user' %}">
+                  {% csrf_token %}
+                  <label for="exampleInputEmail1" class="form-label">Email Address</label>
+                  <input class="contactus" placeholder="Email Address" type="text" name="email">
+                  <label for="exampleInputEmail1" class="form-label">Password</label>
+                  <input class="contactus" placeholder="password" type="password" name="password">
+                  <input type="submit" value="Sumbit" class="btn btn-primary">
+
+                  <p>Don't you have any account?</p>
+                  <a href="{% url 'registration' %}" class="text-danger">Register now</a>
+               </form>
+            </div>
+            <div class="col-md-4"></div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end contact section -->
+{% endblock content %}
