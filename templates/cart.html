@@ -26,7 +26,16 @@
       <tr>
         <th scope="row">{{cart.cart_name}}</th>
         <td>{{cart.cart_price}}</td>
-        <td>{{cart.cart_quantity}}</td>
+        <td style="text-align:center;" style="width:250px">
+          <form action="{% url 'updateqnt' %}" method="get">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{cart.id}}">
+            <div class="input-group " style="width: 180px;">
+              <input type="number" name="qnt" class="form-control" value="{{cart.cart_quantity}}" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+        </td>
         <td>{{cart.cart_tax}}%</td>
         <td>{% widthratio cart.cart_price 1 cart.cart_quantity %}</td>
         <td style="text-align:center"><a href="{% url 'deleteFormCart' cart.id %}">❌</a></td>

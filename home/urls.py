@@ -19,6 +19,7 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('registration/', views.registration, name='registration'),
     path('validate_user/', views.validate_user, name='validate_user'),
+    path('updateqnt/', views.updateqnt, name='updateqnt'),
     path('deleteFormCart/<int:id>', views.deleteFormCart, name='deleteFormCart'),
 
 ]

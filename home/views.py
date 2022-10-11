@@ -47,8 +47,11 @@ def getcart(request):
         total = total + (cart.cart_price * cart.cart_quantity)
 
     sub_total = (total/100)*5 + total
-    context = {'cartList': cartList, 'subtotal': sub_total}
-    return render(request, 'cart.html', context)
+    context = {'cartList': cartList, 'sub_total': sub_total}
+
+    if len(cartList) > 0:
+        return render(request, 'cart.html', context)
+    return redirect('/index/')
 
 
 def about(request):
@@ -129,3 +132,13 @@ def validate_user(request):
 
 def handle_not_found(request, exception):
     return render(request, 'notfound.html')
+
+
+def updateqnt(request):
+    qnt = request.GET.get('qnt')
+    id = int(request.GET.get('id'))
+
+    cart = Cart.objects.get(id=id)
+    cart.cart_quantity = int(qnt)
+    cart.save()
+    return redirect('/getcart/')
