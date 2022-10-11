@@ -125,3 +125,7 @@ def validate_user(request):
     user_password = request.POST.get('password')
 
     return redirect('/index/')
+
+
+def handle_not_found(request, exception):
+    return render(request, 'notfound.html')
